@@ -1,0 +1,61 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   Single source of truth for color, type, spacing, and motion.
+   Edit values here — everything else in the site reads from these.
+   ========================================================================== */
+
+:root {
+  /* ---------- Color ---------- */
+  --color-bg: #0f0f11;
+  --color-bg-elevated: #17171a;
+  --color-text: #f4f3ef;
+  --color-text-muted: #a3a2a0;
+  --color-accent: #7c5cff;
+  --color-accent-contrast: #0f0f11;
+  --color-border: #2a2a2e;
+
+  /* ---------- Fluid type scale (min 320px -> max 1440px viewport) ---------- */
+  /* Formula-based via clamp(): no breakpoints needed for type size */
+  --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.89rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.13rem);
+  --step-1: clamp(1.25rem, 1.19rem + 0.31vw, 1.42rem);
+  --step-2: clamp(1.56rem, 1.47rem + 0.47vw, 1.8rem);
+  --step-3: clamp(1.95rem, 1.81rem + 0.7vw, 2.27rem);
+  --step-4: clamp(2.44rem, 2.24rem + 1vw, 2.86rem);
+  --step-5: clamp(3.05rem, 2.75rem + 1.5vw, 3.6rem);
+
+  /* ---------- Spacing scale (unitless multiplier x base) ---------- */
+  --space-base: 1rem;
+  --space-3xs: calc(var(--space-base) * 0.25);
+  --space-2xs: calc(var(--space-base) * 0.5);
+  --space-xs: calc(var(--space-base) * 0.75);
+  --space-s: var(--space-base);
+  --space-m: calc(var(--space-base) * 1.5);
+  --space-l: calc(var(--space-base) * 2);
+  --space-xl: calc(var(--space-base) * 3);
+  --space-2xl: calc(var(--space-base) * 4);
+  --space-3xl: calc(var(--space-base) * 6);
+
+  /* ---------- Layout ---------- */
+  --content-max-width: 72rem;
+  --content-padding: var(--space-m);
+  --radius-s: 0.375rem;
+  --radius-m: 0.75rem;
+
+  /* ---------- Motion ---------- */
+  /* Named easings — use these instead of raw cubic-bezier so intent stays readable */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+}
+
+/* Respect users who've asked for less motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+---
+<article class="section wrapper flow">
+  <header class="flow">
+    <h1>{{ title }}</h1>
+    {% if description %}<p class="hero__lede">{{ description }}</p>{% endif %}
+  </header>
+
+  {% if media.type == "video" %}
+    <video src="{{ media.src }}" autoplay loop muted playsinline style="border-radius: var(--radius-m);"></video>
+  {% elif media.type == "gif" %}
+    <img src="{{ media.src }}" alt="{{ title }}" loading="lazy">
+  {% endif %}
+
+  <div class="flow">
+    {{ content | safe }}
+  </div>
+</article>

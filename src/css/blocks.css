@@ -1,0 +1,96 @@
+/* ==========================================================================
+   BLOCKS
+   Component-level styling. Named after what they represent, not how
+   they look — e.g. ".nav" not ".flex-row-underline".
+   ========================================================================== */
+
+.site-head {
+  padding-block: var(--space-m);
+}
+
+.site-head__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: var(--step-1);
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-m);
+  list-style: none;
+  padding: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-out-expo);
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+  color: var(--color-text);
+}
+
+/* Card used for case study / motion listing items */
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card__frame {
+  --frame-ratio: 4 / 3;
+  transition: transform var(--duration-base) var(--ease-out-expo);
+}
+
+.card:hover .card__frame {
+  transform: scale(1.02);
+}
+
+.card__title {
+  margin-top: var(--space-s);
+  font-size: var(--step-2);
+}
+
+.card__meta {
+  color: var(--color-text-muted);
+  font-size: var(--step--1);
+}
+
+/* Hero on the homepage */
+.hero {
+  padding-block: var(--space-3xl) var(--space-2xl);
+}
+
+.hero__eyebrow {
+  color: var(--color-accent);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero__title {
+  margin-top: var(--space-xs);
+}
+
+.hero__lede {
+  margin-top: var(--space-m);
+  font-size: var(--step-1);
+  color: var(--color-text-muted);
+}
+
+.site-foot {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-l);
+  color: var(--color-text-muted);
+  font-size: var(--step--1);
+}

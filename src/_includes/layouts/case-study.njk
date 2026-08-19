@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+---
+<article class="section wrapper flow">
+  <header class="flow">
+    <p class="hero__eyebrow">{{ role }} · {{ year }}</p>
+    <h1>{{ title }}</h1>
+    <p class="hero__lede">{{ summary }}</p>
+    {% if tools %}
+      <p class="card__meta">Tools: {{ tools | join(", ") }}</p>
+    {% endif %}
+  </header>
+
+  {% if cover %}
+    <div class="frame" style="--frame-ratio: 16/9">
+      <img src="{{ cover }}" alt="Cover {{ title }}" loading="eager">
+    </div>
+  {% endif %}
+
+  <div class="flow">
+    {{ content | safe }}
+  </div>
+</article>

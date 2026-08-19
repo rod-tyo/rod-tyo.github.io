@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}{% if title %} — {% endif %}{{ meta.siteName }}</title>
+  <meta name="description" content="{{ description or meta.description }}">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/utilities.css">
+  <link rel="stylesheet" href="/css/blocks.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  {% include "partials/site-head.njk" %}
+
+  <main id="main-content" tabindex="-1">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrapper">
+      <p>&copy; {{ currentYear }} {{ meta.siteName }}. Built with Eleventy.</p>
+    </div>
+  </footer>
+</body>
+</html>

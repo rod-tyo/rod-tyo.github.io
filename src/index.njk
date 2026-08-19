@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+title: Home
+---
+<section class="hero wrapper">
+  <p class="hero__eyebrow">Product &amp; Interaction Designer</p>
+  <h1 class="hero__title">Saya mendesain sistem, bukan cuma layar.</h1>
+  <p class="hero__lede">
+    Fokus saya ada di tiga hal: menyelesaikan masalah lewat case study,
+    membangun design system yang scalable, dan menghidupkan interface
+    lewat motion UI.
+  </p>
+</section>
+
+<section class="section wrapper">
+  <h2>Case Study Terbaru</h2>
+  <div class="grid" style="margin-top: var(--space-l);">
+    {% for item in collections.caseStudies %}
+      {% if loop.index <= 3 %}
+        <a class="card" href="{{ item.url }}">
+          <div class="frame card__frame">
+            <img src="{{ item.data.cover }}" alt="{{ item.data.title }}" loading="lazy">
+          </div>
+          <h3 class="card__title">{{ item.data.title }}</h3>
+          <p class="card__meta">{{ item.data.role }} · {{ item.data.year }}</p>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

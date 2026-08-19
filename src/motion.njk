@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+title: Motion UI
+---
+<section class="section wrapper flow">
+  <h1>Motion UI</h1>
+  <div class="grid">
+    {% for item in collections.motion %}
+      <a class="card" href="{{ item.url }}">
+        <div class="frame card__frame" style="--frame-ratio: 1/1;">
+          {% if item.data.media.type == "video" %}
+            <video src="{{ item.data.media.src }}" autoplay loop muted playsinline></video>
+          {% else %}
+            <img src="{{ item.data.media.src }}" alt="{{ item.data.title }}" loading="lazy">
+          {% endif %}
+        </div>
+        <h2 class="card__title">{{ item.data.title }}</h2>
+      </a>
+    {% endfor %}
+  </div>
+</section>

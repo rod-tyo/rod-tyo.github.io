@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Design System
+---
+<section class="section wrapper flow">
+  <h1>Proses Design System</h1>
+  <p class="hero__lede">
+    Catatan tentang bagaimana saya membangun dan mendokumentasikan
+    design system — dari token, komponen, sampai keputusan trade-off.
+  </p>
+  <div class="grid">
+    {% for item in collections.designSystem %}
+      <a class="card" href="{{ item.url }}">
+        <h2 class="card__title">{{ item.data.title }}</h2>
+        <p class="card__meta">{{ item.data.summary }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>

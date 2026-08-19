@@ -1,0 +1,104 @@
+/* ==========================================================================
+   BASE STYLES
+   Reset + default element styling. Reads from tokens.css.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.6;
+  min-height: 100svh;
+}
+
+img,
+picture,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+h2 {
+  font-size: var(--step-4);
+}
+h3 {
+  font-size: var(--step-3);
+}
+h4 {
+  font-size: var(--step-2);
+}
+
+p {
+  text-wrap: pretty;
+  max-width: 65ch;
+}
+
+a {
+  color: inherit;
+}
+
+a:not([class]) {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.15em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 0.25rem;
+}
+
+/* Utility: visually hide but keep accessible to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  padding: var(--space-2xs) var(--space-s);
+  border-radius: var(--radius-s);
+  transition: top var(--duration-base) var(--ease-out-expo);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}

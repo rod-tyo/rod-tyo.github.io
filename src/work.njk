@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+title: Work
+---
+<section class="section wrapper flow">
+  <h1>Case Studies</h1>
+  <div class="grid">
+    {% for item in collections.caseStudies %}
+      <a class="card" href="{{ item.url }}">
+        <div class="frame card__frame">
+          <img src="{{ item.data.cover }}" alt="{{ item.data.title }}" loading="lazy">
+        </div>
+        <h2 class="card__title">{{ item.data.title }}</h2>
+        <p class="card__meta">{{ item.data.role }} · {{ item.data.year }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
