@@ -28,3 +28,45 @@ title: Home
     {% endfor %}
   </div>
 </section>
+
+
+<section class="section section--paper">
+  <div class="wrapper">
+    <p class="section-index">05 / about</p>
+    <div class="about-grid" style="margin-top: var(--space-m);">
+      <div class="flow">
+        <h2>{{ meta.about.heading }}</h2>
+        {% for paragraph in meta.about.paragraphs %}
+          <p>{{ paragraph }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="stats-panel">
+        <div class="stats-panel__header">by the numbers</div>
+        {% for stat in meta.about.stats %}
+          <div class="stats-panel__row">
+            <span>{{ stat.label }}</span>
+            <span class="stats-panel__value">{{ stat.value }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrapper">
+    <p class="section-index">06 / contact</p>
+    <div class="contact__grid" style="margin-top: var(--space-m);">
+      <div>
+        <h2>{{ meta.contact.heading }}</h2>
+        <p class="contact__lede">{{ meta.contact.lede }}</p>
+        <div class="contact__actions">
+          <a class="btn btn--primary" href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a>
+          <a class="btn btn--ghost" href="{{ meta.contact.linkedin }}" target="_blank" rel="noopener">linkedin ↗</a>
+        </div>
+      </div>
+      <img class="contact__avatar" src="{{ meta.contact.avatar }}" alt="Foto profil">
+    </div>
+  </div>
+</section>

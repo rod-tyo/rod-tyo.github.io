@@ -6,13 +6,21 @@
 
 :root {
   /* ---------- Color ---------- */
-  --color-bg: #0f0f11;
-  --color-bg-elevated: #17171a;
-  --color-text: #f4f3ef;
-  --color-text-muted: #a3a2a0;
-  --color-accent: #7c5cff;
-  --color-accent-contrast: #0f0f11;
-  --color-border: #2a2a2e;
+--color-bg: #ffffff;
+--color-bg-elevated: #f7f6f3;
+--color-text: #1c1b1a;
+--color-text-muted: #78766e;
+--color-accent: #d9a61e;
+--color-accent-contrast: #1c1b1a;
+--color-border: #e5e3dd;
+--color-bg-light: #ffffff;
+--color-text-on-light: #1c1b1a;
+--color-text-muted-on-light: #78766e;
+--color-grid-line: rgba(28, 27, 26, 0.06);
+--color-bg-dark: #16161a;
+--color-text-on-dark: #f4f3ef;
+--color-text-muted-on-dark: #a3a2a0;
+--color-border-on-dark: #2c2c30;
 
   /* ---------- Fluid type scale (min 320px -> max 1440px viewport) ---------- */
   /* Formula-based via clamp(): no breakpoints needed for type size */
