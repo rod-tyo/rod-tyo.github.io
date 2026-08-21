@@ -1,72 +1,59 @@
 ---
 layout: layouts/base.njk
-title: Home
+title: Design system and UI Motion designer
 ---
-<section class="hero wrapper">
-  <p class="hero__eyebrow">Product &amp; Interaction Designer</p>
-  <h1 class="hero__title">Saya mendesain sistem, bukan cuma layar.</h1>
-  <p class="hero__lede">
-    Fokus saya ada di tiga hal: menyelesaikan masalah lewat case study,
-    membangun design system yang scalable, dan menghidupkan interface
-    lewat motion UI.
-  </p>
-</section>
 
-<section class="section wrapper">
-  <h2>Case Study Terbaru</h2>
-  <div class="grid" style="margin-top: var(--space-l);">
-    {% for item in collections.caseStudies %}
-      {% if loop.index <= 3 %}
-        <a class="card" href="{{ item.url }}">
-          <div class="frame card__frame">
-            <img src="{{ item.data.cover }}" alt="{{ item.data.title }}" loading="lazy">
-          </div>
-          <h3 class="card__title">{{ item.data.title }}</h3>
-          <p class="card__meta">{{ item.data.role }} · {{ item.data.year }}</p>
-        </a>
-      {% endif %}
-    {% endfor %}
+<section class="hero">
+  <div class="hero__bio">
+    <p>
+      Hey, I'am <strong>Rodetyo Prast</strong>.
+    </p>
+    <p>
+    I'm a UI Designer specialising in Design Systems and product design for web and mobile.
+    Previously at
+    <a href="https://www.dext.com/" target="_blank" rel="noopener noreferrer">Dext</a>,
+    where I helped build and evolve their Design System.
+    </p>
+    <p>
+    I also enjoy exploring illustration and motion interaction to bring digital experiences to life.
+    </p>
   </div>
 </section>
 
+<div class="pill-group">
+  <span class="pill">Design Systems</span>
+  <span class="pill">Motion & Interaction</span>
+  <span class="pill">Eleventy / Web Standards</span>
+</div>
 
-<section class="section section--paper">
-  <div class="wrapper">
-    <p class="section-index">05 / about</p>
-    <div class="about-grid" style="margin-top: var(--space-m);">
-      <div class="flow">
-        <h2>{{ meta.about.heading }}</h2>
-        {% for paragraph in meta.about.paragraphs %}
-          <p>{{ paragraph }}</p>
-        {% endfor %}
-      </div>
+<section class="projects">
+  <h2 class="section-title">Design Systems Experiments</h2>
+  
+  <div class="project-list">
+    <div class="project-item">
+      <a href="#" class="project-item__title">arsip</a> — 
+      <span class="project-item__desc">Paperwork Organizer. Aplikasi macOS dan iOS untuk menyimpan dokumen birokrasi secara privat.</span>
+    </div>
 
-      <div class="stats-panel">
-        <div class="stats-panel__header">by the numbers</div>
-        {% for stat in meta.about.stats %}
-          <div class="stats-panel__row">
-            <span>{{ stat.label }}</span>
-            <span class="stats-panel__value">{{ stat.value }}</span>
-          </div>
-        {% endfor %}
-      </div>
+    <div class="project-item">
+      <a href="#" class="project-item__title">Riso Kit</a> — 
+      <span class="project-item__desc">Browser-based halftone gradient toolkit. Export ke PNG, GLSL, React, atau CSS.</span>
     </div>
   </div>
 </section>
 
-<section class="contact">
-  <div class="wrapper">
-    <p class="section-index">06 / contact</p>
-    <div class="contact__grid" style="margin-top: var(--space-m);">
-      <div>
-        <h2>{{ meta.contact.heading }}</h2>
-        <p class="contact__lede">{{ meta.contact.lede }}</p>
-        <div class="contact__actions">
-          <a class="btn btn--primary" href="mailto:{{ meta.contact.email }}">{{ meta.contact.email }}</a>
-          <a class="btn btn--ghost" href="{{ meta.contact.linkedin }}" target="_blank" rel="noopener">linkedin ↗</a>
-        </div>
-      </div>
-      <img class="contact__avatar" src="{{ meta.contact.avatar }}" alt="Foto profil">
+<section class="photo-section">
+  <h2 class="section-title">Selected Motion and Interaction</h2>
+  <p class="photo-meta">Photography archive · 182 photographs</p>
+  
+  <div class="photo-grid">
+    <div class="photo-card">
+      <img src="https://picsum.photos/400/500?random=1" alt="Everyday study">
+      <span class="photo-card__caption">Everyday study 050</span>
+    </div>
+    <div class="photo-card">
+      <img src="https://picsum.photos/400/500?random=2" alt="Landscape study">
+      <span class="photo-card__caption">Landscape study 039</span>
     </div>
   </div>
 </section>

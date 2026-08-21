@@ -1,69 +1,97 @@
 /* ==========================================================================
-   DESIGN TOKENS
-   Single source of truth for color, type, spacing, and motion.
-   Edit values here — everything else in the site reads from these.
+   DESIGN TOKENS — Minimalist Style
    ========================================================================== */
 
 :root {
-  /* ---------- Color ---------- */
---color-bg: #ffffff;
---color-bg-elevated: #f7f6f3;
---color-text: #1c1b1a;
---color-text-muted: #78766e;
---color-accent: #d9a61e;
---color-accent-contrast: #1c1b1a;
---color-border: #e5e3dd;
---color-bg-light: #ffffff;
---color-text-on-light: #1c1b1a;
---color-text-muted-on-light: #78766e;
---color-grid-line: rgba(28, 27, 26, 0.06);
---color-bg-dark: #16161a;
---color-text-on-dark: #f4f3ef;
---color-text-muted-on-dark: #a3a2a0;
---color-border-on-dark: #2c2c30;
+  /* ---------- Color (Swiss Warm Minimalist) ---------- */
+  --color-bg: #fcfcfc;                 /* Off-white hangat, tidak murni #fff */
+  --color-bg-elevated: #f4f4f2;
+  --color-text: #2a2a2a;               /* Hampir hitam pekat untuk teks utama */
+  --color-text-muted: #666666;         /* Gray kontras sedang untuk body/deskripsi */
+  --color-text-muted-light: #999999;   /* Gray lebih terang untuk metadata/tanggal */
+  --color-text-subtle: #8e8d8a;        /* Gray muda untuk metadata/tanggal */
+  --color-accent: #111111;              /* Style minim warna mencolok, aksen berupa kontras hitam */
+  --color-accent-contrast: #ffffff;
+  --color-border: #e8e8e6;             /* Garis tipis & subtle */
+  --color-accent: #0052FF; /* Atau #FF3B30 */
+  --color-accent-subtle: rgba(0, 82, 255, 0.08);
 
-  /* ---------- Fluid type scale (min 320px -> max 1440px viewport) ---------- */
-  /* Formula-based via clamp(): no breakpoints needed for type size */
-  --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.89rem);
-  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.13rem);
-  --step-1: clamp(1.25rem, 1.19rem + 0.31vw, 1.42rem);
-  --step-2: clamp(1.56rem, 1.47rem + 0.47vw, 1.8rem);
-  --step-3: clamp(1.95rem, 1.81rem + 0.7vw, 2.27rem);
-  --step-4: clamp(2.44rem, 2.24rem + 1vw, 2.86rem);
-  --step-5: clamp(3.05rem, 2.75rem + 1.5vw, 3.6rem);
 
-  /* ---------- Spacing scale (unitless multiplier x base) ---------- */
+/* Teks yang di-highlight mouse */
+::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+  
+  --color-grid-line: rgba(0, 0, 0, 0.04);
+
+  /* Dark mode overrides */
+  --color-bg-dark: #121212;
+  --color-bg-elevated-dark: #1a1a1a;
+  --color-text-dark: #ededed;
+  --color-text-muted-dark: #a1a1a1;
+  --color-border-dark: #262626;
+
+  /* ---------- Fluid Type Scale ---------- */
+  --step--3: clamp(0.625rem, 0.6rem + 0.1vw, 0.65rem);   /* Metadata / Footer (~10px) */
+  --step--2: clamp(0.7rem, 0.68rem + 0.1vw, 0.75rem);   /* Metadata / Footer (~11-12px) */
+  --step--1: clamp(0.8rem, 0.78rem + 0.12vw, 0.85rem);  /* Sub-teks / Navigasi (~13-14px) */
+  --step-0:  clamp(0.875rem, 0.85rem + 0.15vw, 0.938rem);/* Body Text (~14-15px) */
+  --step-1:  clamp(1.05rem, 1.0rem + 0.25vw, 1.15rem);  /* Section Title (~17-18px) */
+
+  /* ---------- Spacing Scale ---------- */
   --space-base: 1rem;
   --space-3xs: calc(var(--space-base) * 0.25);
   --space-2xs: calc(var(--space-base) * 0.5);
   --space-xs: calc(var(--space-base) * 0.75);
   --space-s: var(--space-base);
   --space-m: calc(var(--space-base) * 1.5);
-  --space-l: calc(var(--space-base) * 2);
-  --space-xl: calc(var(--space-base) * 3);
-  --space-2xl: calc(var(--space-base) * 4);
-  --space-3xl: calc(var(--space-base) * 6);
+  --space-l: calc(var(--space-base) * 2.5);            /* Jarak antar seksi */
+  --space-xl: calc(var(--space-base) * 4);
+  --space-2xl: calc(var(--space-base) * 6);
 
   /* ---------- Layout ---------- */
-  --content-max-width: 72rem;
+  --content-max-width: 42rem;                          /* ~672px (Sangat ideal untuk portofolio teks & galeri) */
   --content-padding: var(--space-m);
-  --radius-s: 0.375rem;
-  --radius-m: 0.75rem;
+  --radius-s: 0.25rem;                                 /* Corner radius sangat tipis (4px) */
+  --radius-m: 0.5rem;
 
   /* ---------- Motion ---------- */
-  /* Named easings — use these instead of raw cubic-bezier so intent stays readable */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
-  --duration-fast: 150ms;
-  --duration-base: 300ms;
-  --duration-slow: 600ms;
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+
+  /* ---------- Typography ---------- */
+  /* Utama: Geist/Inter (Clean Sans). Mono: Untuk label/UI angka khas Design Engineer */
+  --font-body: "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", monospace;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Letter Spacing khas Swiss Style */
+  --tracking-tight: -0.025em;                          /* Mengencangkan H1/H2 */
+  --tracking-normal: -0.005em;                         /* Body sedikit dikencangkan */
+  --tracking-mono: 0.02em;                             /* Monospace agak direnggangkan */
 }
 
-/* Respect users who've asked for less motion */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   :root {
     --duration-fast: 0ms;
     --duration-base: 0ms;
-    --duration-slow: 0ms;
   }
+}
+
+/* Dark Theme State */
+[data-theme="dark"] {
+  --color-bg: var(--color-bg-dark);
+  --color-bg-elevated: var(--color-bg-elevated-dark);
+  --color-text: var(--color-text-dark);
+  --color-text-muted: var(--color-text-muted-dark);
+  --color-border: var(--color-border-dark);
+  --color-accent: #ffffff;
+  --color-grid-line: rgba(255, 255, 255, 0.05);
 }
