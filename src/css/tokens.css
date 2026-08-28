@@ -92,6 +92,6 @@
   --color-text: var(--color-text-dark);
   --color-text-muted: var(--color-text-muted-dark);
   --color-border: var(--color-border-dark);
-  --color-accent: #ffffff;
+  --color-accent: #11008e;
   --color-grid-line: rgba(255, 255, 255, 0.05);
 }

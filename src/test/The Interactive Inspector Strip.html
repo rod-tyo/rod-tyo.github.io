@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspector Strip Gallery Demo</title>
+  <style>
+    /* ===================================================
+       1. VARIABLES & BASE SETUP
+    =================================================== */
+    :root {
+      --bg-color: #0d0d0e;
+      --card-bg: #161618;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f4f4f5;
+      --text-subtle: #a1a1aa;
+      --accent-green: #22c55e;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: ui-monospace, 'SF Mono', 'Fira Code', Menlo, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .font-mono {
+      font-family: var(--font-mono);
+    }
+
+    /* ===================================================
+       2. GALLERY CONTAINER
+    =================================================== */
+    .gallery-container {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .gallery-header {
+      margin-bottom: 32px;
+    }
+
+    .gallery-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .gallery-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* ===================================================
+       3. MODEL 1: INSPECTOR CARD
+    =================================================== */
+    .inspector-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .inspector-card__media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .inspector-card:hover .inspector-card__media {
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Top Inspector Bar (Frosted Glass Pill) */
+    .inspector-card__bar {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 3;
+      background: rgba(18, 18, 20, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-subtle);
+      font-size: 0.725rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .meta-right {
+      margin-left: auto;
+      opacity: 0.8;
+    }
+
+    /* Animated CSS Canvas Placeholder (Pengganti file MP4/GIF asli) */
+    .inspector-card__canvas {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #1f1f23 0%, #111113 100%);
+    }
+
+    /* Video / Image Asset (Jika Anda memakai file video/GIF asli) */
+    .inspector-card__media video,
+    .inspector-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Simulated CSS Micro-interaction Animation */
+    .demo-toggle-switch {
+      width: 60px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 4px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .demo-toggle-knob {
+      width: 24px;
+      height: 24px;
+      background: #ffffff;
+      border-radius: 50%;
+      animation: springToggle 2.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+    }
+
+    @keyframes springToggle {
+      0% { transform: translateX(0); background: #ffffff; }
+      100% { transform: translateX(28px); background: #22c55e; }
+    }
+
+    .demo-loader {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer Metadata */
+    .inspector-card__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px;
+    }
+
+    .inspector-card__title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .inspector-card__index {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery-container">
+    <div class="gallery-header">
+      <h2 class="gallery-title">Selected Motion & Interaction</h2>
+      <p class="gallery-subtitle font-mono">Micro-interactions · Elastic Physics · Loops</p>
+    </div>
+
+    <div class="gallery-grid">
+      
+      <!-- CARD ITEM 1 -->
+      <article class="inspector-card">
+        <div class="inspector-card__media">
+          <div class="inspector-card__bar font-mono">
+            <span class="status-dot"></span>
+            <span>Spring Physics</span>
+            <span class="meta-right">60 fps · 1.2s</span>
+          </div>
+
+          <!-- Ganti div di bawah ini dengan tag <video> atau <img> GIF Anda -->
+          <div class="inspector-card__canvas">
+            <div class="demo-toggle-switch">
+              <div class="demo-toggle-knob"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="inspector-card__footer">
+          <h3 class="inspector-card__title">Elastic Switch Physics</h3>
+          <span class="inspector-card__index font-mono">01/06</span>
+        </div>
+      </article>
+
+      <!-- CARD ITEM 2 -->
+      <article class="inspector-card">
+        <div class="inspector-card__media">
+          <div class="inspector-card__bar font-mono">
+            <span class="status-dot"></span>
+            <span>Ease-In-Out</span>
+            <span class="meta-right">120 fps · 2.0s</span>
+          </div>
+
+          <!-- Ganti div di bawah ini dengan tag <video> atau <img> GIF Anda -->
+          <div class="inspector-card__canvas">
+            <div class="demo-loader"></div>
+          </div>
+        </div>
+
+        <div class="inspector-card__footer">
+          <h3 class="inspector-card__title">Adaptive Spinner State</h3>
+          <span class="inspector-card__index font-mono">02/06</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+</body>
+</html>

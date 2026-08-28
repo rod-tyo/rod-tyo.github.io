@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Yellow Folder Minimalist Portfolio</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --sidebar-bg: #fafafa;
+      --border: #f0f0f0;
+      --border-hover: #e0e0e0;
+      --text-main: #111111;
+      --text-sub: #777777;
+      
+      /* Warna Khas Folder Kuning */
+      --folder-yellow: #ffc83b;
+      --folder-tab: #e0a821;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* SHELL UTAMA */
+    .finder-window {
+      width: 100%;
+      max-width: 960px;
+      height: 540px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.03);
+    }
+
+    /* BAR ATAS */
+    .finder-header {
+      height: 48px;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .window-dots { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #eaeaea; }
+    .window-path {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      font-family: monospace;
+    }
+
+    /* LAYOUT BODY */
+    .finder-body { display: flex; flex: 1; overflow: hidden; }
+
+    /* SIDEBAR */
+    .finder-sidebar {
+      width: 200px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sidebar-title {
+      font-size: 0.68rem;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      padding-left: 8px;
+    }
+    .sidebar-item {
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      color: var(--text-sub);
+      transition: all 0.15s ease;
+      font-weight: 500;
+    }
+    .sidebar-item:hover, .sidebar-item.active {
+      background: #ffffff;
+      color: var(--text-main);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    /* GRID UTAMA */
+    .finder-content {
+      flex: 1;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 20px;
+      align-content: start;
+      overflow-y: auto;
+    }
+
+    /* KARTU FOLDER KUNING */
+    .file-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+    }
+    .file-card:hover {
+      background: var(--sidebar-bg);
+      transform: translateY(-3px);
+    }
+    .file-card.selected {
+      background: #ffffff;
+      border-color: var(--border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    /* IKON FOLDER SVG KUNING */
+    .yellow-folder-icon {
+      width: 44px;
+      height: 38px;
+      margin-bottom: 12px;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+    .file-card:hover .yellow-folder-icon {
+      transform: scale(1.05);
+    }
+
+    .file-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+    .file-ext {
+      font-size: 0.65rem;
+      color: var(--text-sub);
+      font-family: monospace;
+    }
+
+    /* PANEL INSPECTOR */
+    .finder-inspector {
+      width: 250px;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .inspector-preview {
+      width: 100%;
+      height: 130px;
+      background: var(--sidebar-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .inspector-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .inspector-desc {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .btn-open {
+      width: 100%;
+      background: var(--text-main);
+      color: #ffffff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-open:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+
+  <div class="finder-window">
+    <div class="finder-header">
+      <div class="window-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <span class="window-path">src / portfolio / yellow_folders</span>
+    </div>
+
+    <div class="finder-body">
+      <!-- SIDEBAR -->
+      <div class="finder-sidebar">
+        <div class="sidebar-title">Kategori</div>
+        <div class="sidebar-item active">Semua Folder</div>
+        <div class="sidebar-item">Motion Graphics</div>
+        <div class="sidebar-item">UI/UX Cases</div>
+        <div class="sidebar-item">Experiments</div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="finder-content">
+
+        <!-- FOLDER ITEM 1 -->
+        <div class="file-card selected" onclick="selectFolder('Motion Showcase', 'Folder berisi kumpulan file animasi Lottie interaktif.', '📁')">
+          <svg class="yellow-folder-icon" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="#FFC83B"/>
+            <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="#FFD45E"/>
+          </svg>
+          <div class="file-name">Motion</div>
+          <div class="file-ext">4 items</div>
+        </div>
+
+        <!-- FOLDER ITEM 2 -->
+        <div class="file-card" onclick="selectFolder('UI Design Systems', 'Komponen token dan sistem desain interaktif.', '📂')">
+          <svg class="yellow-folder-icon" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="#FFC83B"/>
+            <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="#FFD45E"/>
+          </svg>
+          <div class="file-name">UI System</div>
+          <div class="file-ext">2 items</div>
+        </div>
+
+        <!-- FOLDER ITEM 3 -->
+        <div class="file-card" onclick="selectFolder('Lab & Prototypes', 'Eksperimen fitur web interaktif menggunakan Eleventy.', '🧪')">
+          <svg class="yellow-folder-icon" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="#FFC83B"/>
+            <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="#FFD45E"/>
+          </svg>
+          <div class="file-name">Web Lab</div>
+          <div class="file-ext">8 items</div>
+        </div>
+
+      </div>
+
+      <!-- INSPECTOR PANEL -->
+      <div class="finder-inspector">
+        <div class="inspector-preview" id="inspect-icon">
+          <svg width="48" height="40" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="#FFC83B"/>
+            <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="#FFD45E"/>
+          </svg>
+        </div>
+        <div class="inspector-title" id="inspect-title">Motion Showcase</div>
+        <div class="inspector-desc" id="inspect-desc">Folder berisi kumpulan file animasi Lottie interaktif.</div>
+        <button class="btn-open">Buka Folder ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function selectFolder(name, desc) {
+      document.getElementById('inspect-title').innerText = name;
+      document.getElementById('inspect-desc').innerText = desc;
+      
+      document.querySelectorAll('.file-card').forEach(card => card.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+  </script>
+
+</body>
+</html>

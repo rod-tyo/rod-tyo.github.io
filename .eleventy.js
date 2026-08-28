@@ -1,12 +1,13 @@
 const { EleventyRenderPlugin } = require("@11ty/eleventy");
 
 module.exports = function (eleventyConfig) {
-  // Static assets — copy as-is to output
+  // ----- Static Assets (Salin folder ke folder output 'dist') -----
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/images");
+  eleventyConfig.addPassthroughCopy("src/assets"); 
   eleventyConfig.addPassthroughCopy("src/videos");
 
-  // Plugin needed for {% renderFile %} style includes (optional, handy for critical CSS later)
+  // Plugin needed for {% renderFile %} style includes
   eleventyConfig.addPlugin(EleventyRenderPlugin);
 
   // ----- Collections -----
@@ -33,7 +34,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addGlobalData("currentYear", () => new Date().getFullYear());
 
-  // Simple date filter, handy in templates if you show "last updated"
+  // Simple date filter
   eleventyConfig.addFilter("readableDate", (dateObj) => {
     return new Date(dateObj).toLocaleDateString("id-ID", {
       year: "numeric",
@@ -42,13 +43,13 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  // ----- Config return settings -----
   return {
     dir: {
       input: "src",
       includes: "_includes",
-      output: "dist",
+      output: "dist", // Output folder Anda adalah 'dist'
     },
-    // Markdown files run through Nunjucks too, so front matter layouts + {{ }} work inside .md
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
   };

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodetyo Prast — Portfolio</title>
+  <style>
+    :root {
+      --bg: #fcfcfc;
+      --text-main: #18181b;
+      --text-sub: #71717a;
+      --border-color: #e4e4e7;
+      --badge-bg: #f4f4f5;
+      --folder-yellow: #ffc83b;
+      --folder-yellow-front: #ffd45e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 40px 20px 80px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px; /* Ukuran container persis sesuai layout Anda */
+    }
+
+    /* HEADER TOP */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .logo { font-weight: 600; font-size: 1.1rem; }
+    .theme-toggle { cursor: pointer; font-size: 1.2rem; }
+
+    /* PIXEL ART BANNER CONTAINER */
+    .hero-banner {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      background: #fff;
+    }
+    .hero-banner img {
+      width: 100%;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    /* BIO SECTION */
+    .bio-section { margin-bottom: 32px; }
+    .bio-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 16px; color: var(--text-sub); }
+    .bio-title strong { color: var(--text-main); font-weight: 600; }
+    .bio-text { font-size: 0.95rem; line-height: 1.6; color: var(--text-sub); margin-bottom: 16px; }
+    .bio-text a { color: var(--text-main); text-decoration: underline; text-underline-offset: 4px; }
+
+    /* TAGS / BADGES */
+    .badge-group { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+    .badge {
+      background: var(--badge-bg);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-family: monospace;
+      color: var(--text-sub);
+    }
+
+    /* SECTION TITLE */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    /* FINDER WINDOW INTERACTIVE */
+    .finder-window {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .finder-header {
+      height: 36px;
+      background: var(--badge-bg);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+    }
+    .dots { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #d4d4d8; }
+    .path-text { margin-left: auto; font-family: monospace; font-size: 0.75rem; color: var(--text-sub); }
+
+    .finder-body { display: flex; min-height: 240px; }
+    
+    /* SIDEBAR FINDER */
+    .finder-sidebar {
+      width: 160px;
+      border-right: 1px solid var(--border-color);
+      padding: 16px 8px;
+      background: #fafafa;
+    }
+    .sidebar-item {
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      color: var(--text-sub);
+      cursor: pointer;
+      margin-bottom: 4px;
+    }
+    .sidebar-item:hover, .sidebar-item.active { background: #fff; color: var(--text-main); font-weight: 500; }
+
+    /* CONTENT GRID FINDER */
+    .finder-content {
+      flex: 1;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 16px;
+      align-content: start;
+    }
+
+    .folder-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .folder-card:hover { background: var(--badge-bg); }
+    
+    .folder-icon { width: 38px; height: 30px; margin-bottom: 8px; }
+    .folder-name { font-size: 0.75rem; font-weight: 500; text-align: center; }
+    .folder-count { font-size: 0.65rem; color: var(--text-sub); font-family: monospace; }
+
+    /* FOOTER ARCHIVE LIST */
+    .archive-footer {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      font-family: monospace;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- TOP HEADER -->
+    <header>
+      <div class="logo">R</div>
+      <div class="theme-toggle">⚙️</div>
+    </header>
+
+    <!-- PIXEL ART BANNER -->
+    <div class="hero-banner">
+      <img src="banner-pixel.png" alt="Workspace Pixel Art">
+    </div>
+
+    <!-- BIO TEXT -->
+    <div class="bio-section">
+      <p class="bio-title">Hey, I'm <strong>Rodetyo Prast</strong>.</p>
+      <p class="bio-text">
+        I'm a UI Designer specialising in Design Systems and product design for web and mobile. Previously at <a href="#">Dext</a>, where I helped build and evolve their Design System.
+      </p>
+      <p class="bio-text">
+        I also enjoy exploring illustration and motion interaction to bring digital experiences to life.
+      </p>
+    </div>
+
+    <!-- BADGES -->
+    <div class="badge-group">
+      <span class="badge">Design Systems</span>
+      <span class="badge">Motion & Interaction</span>
+      <span class="badge">Eleventy / Web Standards</span>
+    </div>
+
+    <!-- INTERACTIVE FINDER SECTION -->
+    <div class="section-label">Selected Works & Experiments</div>
+    
+    <div class="finder-window">
+      <div class="finder-header">
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="path-text">~/rodetyo/works</div>
+      </div>
+
+      <div class="finder-body">
+        <div class="finder-sidebar">
+          <div class="sidebar-item active">📁 All Projects</div>
+          <div class="sidebar-item">🎨 Design Systems</div>
+          <div class="sidebar-item">✨ Motion (.json)</div>
+        </div>
+
+        <div class="finder-content">
+          <!-- FOLDER 1 -->
+          <div class="folder-card">
+            <svg class="folder-icon" viewBox="0 0 40 32" fill="none">
+              <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow)"/>
+              <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+            </svg>
+            <div class="folder-name">Dext</div>
+            <div class="folder-count">.case</div>
+          </div>
+
+          <!-- FOLDER 2 -->
+          <div class="folder-card">
+            <svg class="folder-icon" viewBox="0 0 40 32" fill="none">
+              <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow)"/>
+              <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+            </svg>
+            <div class="folder-name">Riso Kit</div>
+            <div class="folder-count">.dev</div>
+          </div>
+
+          <!-- FOLDER 3 -->
+          <div class="folder-card">
+            <svg class="folder-icon" viewBox="0 0 40 32" fill="none">
+              <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow)"/>
+              <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+            </svg>
+            <div class="folder-name">Skater</div>
+            <div class="folder-count">.json</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHIVE LINK -->
+    <div class="archive-footer">
+      Photography archive · 182 photographs
+    </div>
+  </div>
+
+</body>
+</html>

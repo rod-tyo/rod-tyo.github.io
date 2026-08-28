@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model 3: Masonry Aspect Grid Demo</title>
+  <style>
+    :root {
+      --bg: #0d0d0e;
+      --card-bg: #161618;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f4f4f5;
+      --text-subtle: #a1a1aa;
+      --font-mono: ui-monospace, 'SF Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .font-mono { font-family: var(--font-mono); }
+
+    .gallery-container { width: 100%; max-width: 960px; }
+    .gallery-header { margin-bottom: 32px; }
+    .gallery-title { font-size: 1.25rem; font-weight: 600; }
+    .gallery-subtitle { font-size: 0.85rem; color: var(--text-subtle); margin-top: 4px; }
+
+    /* MASONRY COLUMN LAYOUT */
+    .masonry-grid {
+      column-count: 1;
+      column-gap: 20px;
+    }
+
+    @media (min-width: 600px) {
+      .masonry-grid { column-count: 2; }
+    }
+
+    @media (min-width: 900px) {
+      .masonry-grid { column-count: 3; }
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .masonry-item__media {
+      position: relative;
+      width: 100%;
+      background-color: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s ease;
+    }
+
+    .masonry-item:hover .masonry-item__media {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* VARIASI ASPECT RATIO MEDIA */
+    .aspect-portrait { aspect-ratio: 3 / 4; }
+    .aspect-square { aspect-ratio: 1 / 1; }
+    .aspect-landscape { aspect-ratio: 16 / 10; }
+
+    .masonry-item__canvas {
+      width: 100%; height: 100%;
+      display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
+      color: var(--text-subtle); font-size: 0.8rem;
+    }
+
+    .masonry-item__footer {
+      display: flex; justify-content: space-between; align-items: baseline; padding: 0 2px;
+    }
+    .masonry-item__title { font-size: 0.875rem; font-weight: 500; }
+    .masonry-item__tag { font-size: 0.725rem; color: var(--text-subtle); }
+  </style>
+</head>
+<body>
+
+  <div class="gallery-container">
+    <div class="gallery-header">
+      <h2 class="gallery-title">Model 3: Dynamic Masonry Grid</h2>
+      <p class="gallery-subtitle font-mono">Grid fleksibel dengan berbagai variasi rasio aspek</p>
+    </div>
+
+    <div class="masonry-grid">
+      
+      <!-- ITEM 1: PORTRAIT (3:4) -->
+      <article class="masonry-item">
+        <div class="masonry-item__media aspect-portrait">
+          <div class="masonry-item__canvas font-mono">[ Video 3:4 Vertical ]</div>
+        </div>
+        <div class="masonry-item__footer">
+          <h3 class="masonry-item__title">Mobile Swipe Physics</h3>
+          <span class="masonry-item__tag font-mono">01/05</span>
+        </div>
+      </article>
+
+      <!-- ITEM 2: LANDSCAPE (16:10) -->
+      <article class="masonry-item">
+        <div class="masonry-item__media aspect-landscape">
+          <div class="masonry-item__canvas font-mono">[ Video 16:10 Horizontal ]</div>
+        </div>
+        <div class="masonry-item__footer">
+          <h3 class="masonry-item__title">Desktop Navigation Transition</h3>
+          <span class="masonry-item__tag font-mono">02/05</span>
+        </div>
+      </article>
+
+      <!-- ITEM 3: SQUARE (1:1) -->
+      <article class="masonry-item">
+        <div class="masonry-item__media aspect-square">
+          <div class="masonry-item__canvas font-mono">[ Video 1:1 Square ]</div>
+        </div>
+        <div class="masonry-item__footer">
+          <h3 class="masonry-item__title">Halftone Shader Pulse</h3>
+          <span class="masonry-item__tag font-mono">03/05</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+</body>
+</html>

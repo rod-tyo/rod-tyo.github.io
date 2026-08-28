@@ -1,21 +1,37 @@
 ---
 layout: layouts/base.njk
-title: Design system and UI Motion designer
+title: 
 ---
 
+
+
 <section class="hero">
+  <!-- 1. Ilustrasi ditaruh terpisah di atas bio -->
+  <div class="hero__illustration">
+    <img 
+      src="{{ '/assets/artboard1.PNG' | url }}" 
+      alt="Hero Illustration" 
+      class="hero__illustration-img"
+      width="1300"
+      height="520"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <!-- 2. Paragraf Bio berada di dalam kontainer bio tersendiri -->
   <div class="hero__bio">
     <p>
       Hey, I'am <strong>Rodetyo Prast</strong>.
     </p>
     <p>
-    I'm a UI Designer specialising in Design Systems and product design for web and mobile.
-    Previously at
-    <a href="https://www.dext.com/" target="_blank" rel="noopener noreferrer">Dext</a>,
-    where I helped build and evolve their Design System.
+      I'm a UI Designer specialising in Design Systems and product design for web and mobile.
+      Previously at
+      <a href="https://www.dext.com/" target="_blank" rel="noopener noreferrer">Dext</a>,
+      where I helped build and evolve their Design System.
     </p>
     <p>
-    I also enjoy exploring illustration and motion interaction to bring digital experiences to life.
+      I also enjoy exploring illustration and motion interaction to bring digital experiences to life.
     </p>
   </div>
 </section>
@@ -26,34 +42,124 @@ title: Design system and UI Motion designer
   <span class="pill">Eleventy / Web Standards</span>
 </div>
 
-<section class="projects">
-  <h2 class="section-title">Design Systems Experiments</h2>
-  
-  <div class="project-list">
-    <div class="project-item">
-      <a href="#" class="project-item__title">arsip</a> — 
-      <span class="project-item__desc">Paperwork Organizer. Aplikasi macOS dan iOS untuk menyimpan dokumen birokrasi secara privat.</span>
+<!-- FINDER SECTION -->
+<div class="section-label">Selected Works & Experiments</div>
+
+<div class="finder-window">
+  <!-- TOP BAR -->
+  <div class="finder-header">
+    <div class="window-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="path-text">~/rodetyo/works</div>
+  </div>
+
+  <div class="finder-body">
+    <!-- SIDEBAR CATEGORIES -->
+    <div class="finder-sidebar">
+      <button class="sidebar-btn active" onclick="filterCategory('all', this)">📁 All Works</button>
+      <button class="sidebar-btn" onclick="filterCategory('design-system', this)">🎨 Design System</button>
+      <button class="sidebar-btn" onclick="filterCategory('motion', this)">✨ Motion & UI</button>
     </div>
 
-    <div class="project-item">
-      <a href="#" class="project-item__title">Riso Kit</a> — 
-      <span class="project-item__desc">Browser-based halftone gradient toolkit. Export ke PNG, GLSL, React, atau CSS.</span>
+    <!-- MAIN GRID ITEMS -->
+    <div class="finder-content" id="finder-grid">
+      
+      <!-- ITEM 1: DEXT -->
+      <a href="/case-studies/dext/" class="folder-card" data-category="design-system">
+        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
+          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
+          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+        </svg>
+        <span class="folder-name">Dext</span>
+        <span class="folder-tag">.case</span>
+      </a>
+
+      <!-- ITEM 2: RISO KIT -->
+      <a href="/test/Riso-Kit/" class="folder-card" data-category="design-system">
+        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
+          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
+          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+        </svg>
+        <span class="folder-name">Riso Kit</span>
+        <span class="folder-tag">.dev</span>
+      </a>
+
+      <!-- ITEM 3: ANIMASI SKATER -->
+      <a href="/test/animasi.html" class="folder-card" data-category="motion">
+        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
+          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
+          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+        </svg>
+        <span class="folder-name">Skater</span>
+        <span class="folder-tag">.json</span>
+      </a>
+
+      <!-- ITEM 4: HOVER TO PLAY -->
+      <a href="/test/Hover%20to%20play.html" class="folder-card" data-category="motion">
+        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
+          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
+          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+        </svg>
+        <span class="folder-name">HoverPlay</span>
+        <span class="folder-tag">.dev</span>
+      </a>
+
     </div>
   </div>
-</section>
+</div>
 
-<section class="photo-section">
-  <h2 class="section-title">Selected Motion and Interaction</h2>
-  <p class="photo-meta">Photography archive · 182 photographs</p>
+<script>
+  function filterCategory(category, element) {
+    document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
+    element.classList.add('active');
+
+    const items = document.querySelectorAll('.folder-card');
+    items.forEach(item => {
+      if (category === 'all' || item.getAttribute('data-category') === category) {
+        item.style.display = 'flex';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+<section class="tech-icons-section">
+  <h2 class="section-title">Tools & Frameworks</h2>
   
-  <div class="photo-grid">
-    <div class="photo-card">
-      <img src="https://picsum.photos/400/500?random=1" alt="Everyday study">
-      <span class="photo-card__caption">Everyday study 050</span>
+  <div class="icon-grid">
+    <!-- Icon 1: Figma -->
+    <div class="icon-item" aria-label="Figma">
+      <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
+        <path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/>
+        <path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+        <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/>
+        <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
+      </svg>
+      <span class="icon-label font-mono">Figma</span>
     </div>
-    <div class="photo-card">
-      <img src="https://picsum.photos/400/500?random=2" alt="Landscape study">
-      <span class="photo-card__caption">Landscape study 039</span>
+
+    <!-- Icon 2: React / JS -->
+    <div class="icon-item" aria-label="React">
+      <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(30 12 12)"/>
+        <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(90 12 12)"/>
+        <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(150 12 12)"/>
+        <circle cx="12" cy="12" r="1.5"/>
+      </svg>
+      <span class="icon-label font-mono">React</span>
+    </div>
+
+    <!-- Icon 3: CSS / Motion -->
+    <div class="icon-item" aria-label="CSS Motion">
+      <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+      <span class="icon-label font-mono">GSAP / CSS</span>
     </div>
   </div>
 </section>
