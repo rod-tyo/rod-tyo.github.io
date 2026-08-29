@@ -1,12 +1,9 @@
 ---
 layout: layouts/base.njk
-title: 
+title: Home
 ---
 
-
-
 <section class="hero">
-  <!-- 1. Ilustrasi ditaruh terpisah di atas bio -->
   <div class="hero__illustration">
     <img 
       src="{{ '/assets/artboard1.PNG' | url }}" 
@@ -19,7 +16,6 @@ title:
     />
   </div>
 
-  <!-- 2. Paragraf Bio berada di dalam kontainer bio tersendiri -->
   <div class="hero__bio">
     <p>
       Hey, I'am <strong>Rodetyo Prast</strong>.
@@ -42,11 +38,9 @@ title:
   <span class="pill">Eleventy / Web Standards</span>
 </div>
 
-<!-- FINDER SECTION -->
 <div class="section-label">Selected Works & Experiments</div>
 
 <div class="finder-window">
-  <!-- TOP BAR -->
   <div class="finder-header">
     <div class="window-dots">
       <div class="dot"></div>
@@ -57,81 +51,106 @@ title:
   </div>
 
   <div class="finder-body">
-    <!-- SIDEBAR CATEGORIES -->
     <div class="finder-sidebar">
-      <button class="sidebar-btn active" onclick="filterCategory('all', this)">📁 All Works</button>
-      <button class="sidebar-btn" onclick="filterCategory('design-system', this)">🎨 Design System</button>
-      <button class="sidebar-btn" onclick="filterCategory('motion', this)">✨ Motion & UI</button>
+      <button class="sidebar-btn active" onclick="filterCategory('all', this)">
+        <i data-lucide="folder"></i>
+        <span>All Works</span>
+      </button>
+
+      <button class="sidebar-btn" onclick="filterCategory('design-system', this)">
+        <i data-lucide="palette"></i>
+        <span>Design System</span>
+      </button>
+
+      <button class="sidebar-btn" onclick="filterCategory('interface', this)">
+        <i data-lucide="sparkles"></i>
+        <span>Interface</span>
+      </button>
+
+      <button class="sidebar-btn" onclick="filterCategory('motion', this)">
+        <i data-lucide="film"></i>
+        <span>Motion & Illustration</span>
+      </button>
     </div>
 
-    <!-- MAIN GRID ITEMS -->
     <div class="finder-content" id="finder-grid">
-      
-      <!-- ITEM 1: DEXT -->
-      <a href="/case-studies/dext/" class="folder-card" data-category="design-system">
-        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
-          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
-          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
-        </svg>
-        <span class="folder-name">Dext</span>
-        <span class="folder-tag">.case</span>
-      </a>
+      {% for item in collections.works %}
+        
+        {# Memaksa ekstensi/meta menjadi string murni #}
+        {% set rawMeta = item.data.meta | string %}
+        {% if rawMeta == "[object Object]" or not rawMeta %}
+          {% if item.data.type == "folder" %}
+            {% set cleanMeta = ".case" %}
+          {% else %}
+            {% set cleanMeta = ".gif" %}
+          {% endif %}
+        {% else %}
+          {% set cleanMeta = rawMeta %}
+        {% endif %}
 
-      <!-- ITEM 2: RISO KIT -->
-      <a href="/test/Riso-Kit/" class="folder-card" data-category="design-system">
-        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
-          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
-          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
-        </svg>
-        <span class="folder-name">Riso Kit</span>
-        <span class="folder-tag">.dev</span>
-      </a>
+        {# Jika tipe item adalah Folder / Case Study #}
+        {% if item.data.type == "folder" %}
+          <a href="{{ item.data.url | url }}" class="folder-card" data-category="{{ item.data.category }}">
+            <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
+              <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
+              <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
+            </svg>
+            <span class="folder-name">{{ item.data.title }}</span>
+            <span class="folder-tag">{{ cleanMeta }}</span>
+          </a>
 
-      <!-- ITEM 3: ANIMASI SKATER -->
-      <a href="/test/animasi.html" class="folder-card" data-category="motion">
-        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
-          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
-          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
-        </svg>
-        <span class="folder-name">Skater</span>
-        <span class="folder-tag">.json</span>
-      </a>
+        {# Jika tipe item adalah File / Direct Preview (GIF, PNG, dll) #}
+        {% else %}
+          <div 
+            class="file-card" 
+            data-category="{{ item.data.category }}" 
+            data-src="{{ item.data.src | url }}" 
+            data-title="{{ item.data.title }}" 
+            data-meta="{{ cleanMeta }}" 
+            onclick="openPreviewByElement(this)"
+          >
+            <div class="file-thumb">
+              <img src="{{ item.data.src | url }}" alt="{{ item.data.title }}" loading="lazy" />
+            </div>
+            <span class="folder-name">{{ item.data.title }}</span>
+            <span class="folder-tag">{{ cleanMeta }}</span>
+          </div>
+        {% endif %}
 
-      <!-- ITEM 4: HOVER TO PLAY -->
-      <a href="/test/Hover%20to%20play.html" class="folder-card" data-category="motion">
-        <svg class="folder-svg" viewBox="0 0 40 32" fill="none">
-          <path d="M0 4C0 1.79086 1.79086 0 4 0H14L18 4H36C38.2091 4 40 5.79086 40 8V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V4Z" fill="var(--folder-yellow-back)"/>
-          <path d="M0 10C0 7.79086 1.79086 6 4 6H36C38.2091 6 40 7.79086 40 10V28C40 30.2091 38.2091 32 36 32H4C1.79086 32 0 30.2091 0 28V10Z" fill="var(--folder-yellow-front)"/>
-        </svg>
-        <span class="folder-name">HoverPlay</span>
-        <span class="folder-tag">.dev</span>
-      </a>
-
+      {% endfor %}
     </div>
   </div>
 </div>
 
-<script>
-  function filterCategory(category, element) {
-    document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
-    element.classList.add('active');
+<!-- MODAL PREVIEW -->
+<div id="finder-modal" class="finder-modal" onclick="closePreview(event)">
+  <div class="modal-window">
+    <div class="modal-header">
+      <span id="modal-title" class="modal-title">File Preview</span>
+      <button class="modal-close" type="button" onclick="closePreview(event, true)">✕</button>
+    </div>
+    <div class="modal-body">
+      <button class="modal-nav prev-btn" id="modal-prev-btn" onclick="navigatePreview(-1)" aria-label="Previous">
+        <i data-lucide="chevron-left"></i>
+      </button>
 
-    const items = document.querySelectorAll('.folder-card');
-    items.forEach(item => {
-      if (category === 'all' || item.getAttribute('data-category') === category) {
-        item.style.display = 'flex';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  }
-</script>
+      <img id="modal-img" src="" alt="Preview" />
 
+      <button class="modal-nav next-btn" id="modal-next-btn" onclick="navigatePreview(1)" aria-label="Next">
+        <i data-lucide="chevron-right"></i>
+      </button>
+    </div>
+    <div class="modal-footer">
+      <span id="modal-meta" class="modal-meta">Details</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS SECTION -->
 <section class="tech-icons-section">
   <h2 class="section-title">Tools & Frameworks</h2>
   
   <div class="icon-grid">
-    <!-- Icon 1: Figma -->
     <div class="icon-item" aria-label="Figma">
       <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
@@ -143,7 +162,6 @@ title:
       <span class="icon-label font-mono">Figma</span>
     </div>
 
-    <!-- Icon 2: React / JS -->
     <div class="icon-item" aria-label="React">
       <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(30 12 12)"/>
@@ -154,7 +172,6 @@ title:
       <span class="icon-label font-mono">React</span>
     </div>
 
-    <!-- Icon 3: CSS / Motion -->
     <div class="icon-item" aria-label="CSS Motion">
       <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>

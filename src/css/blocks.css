@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BLOCKS —  Minimalist Style
+   BLOCKS — Minimalist Style
    ========================================================================== */
 
 /* ---------- Header & Nav ---------- */
@@ -28,12 +28,10 @@
   overflow: hidden;
 }
 
-/* Huruf pertama 'R' selalu terlihat */
 .logo__first {
   display: inline-block;
 }
 
-/* Sisa teks disembunyikan secara halus lewat max-width & opacity */
 .logo__rest {
   display: inline-block;
   max-width: 0;
@@ -44,10 +42,9 @@
     opacity var(--duration-fast) ease-in-out;
 }
 
-/* Hover / Focus State: Munculkan sisa nama */
 .logo:hover .logo__rest,
 .logo:focus-visible .logo__rest {
-  max-width: 12ch; /* Cukup lebar untuk menampung "odetyo Prast" */
+  max-width: 12ch;
   opacity: 1;
 } 
 
@@ -133,7 +130,7 @@
   font-weight: var(--font-weight-medium);
 }
 
-/* ---------- Hero Illustration (Compact Banner 2.5:1) ---------- */
+/* ---------- Hero Illustration ---------- */
 .hero__illustration {
   width: 100%;
   aspect-ratio: 2.5 / 1;
@@ -141,13 +138,13 @@
   border-radius: var(--radius-s);
   border: none;
   overflow: hidden;
-  margin-bottom: var(--space-m); /* Memberikan jarak napas yang pas ke teks bio */
+  margin-bottom: var(--space-m);
 }
 
 .hero__illustration-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Gunakan 'contain' jika bentuk ilustrasi berupa objek utuh tanpa crop */
+  object-fit: cover;
   display: block;
 }
 
@@ -157,8 +154,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-top: var(--space-3xs); /* Menempel rapat dengan teks bio */
-  margin-bottom: var(--space-m); /* Memberi jarak ke teks berikutnya */
+  margin-top: var(--space-3xs);
+  margin-bottom: var(--space-m);
 }
 
 .pill {
@@ -168,7 +165,7 @@
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   padding: 0.2em 0.7em;
-  border-radius: 9999px; /* Bentuk kapsul melengkung halus */
+  border-radius: 9999px;
   line-height: 1.3;
   transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
 }
@@ -226,9 +223,9 @@
 }
 
 
-/* ==========================================
+/* ==========================================================================
    INTERACTIVE FINDER COMPONENT
-   ========================================== */
+   ========================================================================== */
 :root {
   --finder-bg: #ffffff;
   --finder-sidebar: #fafafa;
@@ -280,7 +277,7 @@
 
 /* SIDEBAR */
 .finder-sidebar {
-  width: 170px;
+  width: 190px;
   border-right: 1px solid var(--finder-border);
   padding: 16px 8px;
   background: #fcfcfc;
@@ -288,7 +285,11 @@
   flex-direction: column;
   gap: 4px;
 }
+
 .sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 7px 10px;
   font-size: 0.8rem;
   border-radius: 6px;
@@ -301,10 +302,18 @@
   font-weight: 500;
   transition: all 0.15s ease;
 }
-.sidebar-btn:hover, .sidebar-btn.active {
+
+.sidebar-btn:hover, 
+.sidebar-btn.active {
   background: var(--finder-bg);
   color: var(--finder-text);
   box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.sidebar-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 /* GRID CONTENT */
@@ -331,23 +340,25 @@
   text-decoration: none;
   color: inherit;
 }
+
 .folder-card:hover {
   background: var(--finder-badge-bg);
   transform: translateY(-2px);
 }
+
 .folder-card.active-folder {
   border-color: var(--finder-border);
   background: #ffffff;
   box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
-/* ICON FOLDER SVG KUNING */
 .folder-svg {
   width: 42px;
   height: 34px;
   margin-bottom: 8px;
   transition: transform 0.2s ease;
 }
+
 .folder-card:hover .folder-svg {
   transform: scale(1.05);
 }
@@ -355,63 +366,187 @@
 .folder-name { font-size: 0.78rem; font-weight: 500; text-align: center; margin-bottom: 2px; }
 .folder-tag { font-size: 0.65rem; color: var(--finder-sub); font-family: monospace; }
 
-/* ---------- Photography Gallery Grid ---------- */
-.photo-section {
-  margin-block: var(--space-xl);
+/* FILE CARD PREVIEW */
+.file-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
-.photo-meta {
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  color: var(--color-text-subtle);
-  margin-bottom: var(--space-s);
+.file-card * {
+  pointer-events: none;
 }
 
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: var(--space-s);
-  margin-top: var(--space-m);
+.file-card:hover {
+  background: var(--finder-badge-bg);
+  transform: translateY(-2px);
 }
 
-.photo-card {
-  position: relative;
+.file-thumb {
+  width: 56px;
+  height: 48px;
+  border-radius: 6px;
   overflow: hidden;
-  border-radius: var(--radius-s);
-  background: var(--color-bg-elevated);
-  aspect-ratio: 4 / 5;
+  border: 1px solid var(--finder-border);
+  background: #ffffff;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.photo-card img {
+.file-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--duration-base) var(--ease-out-expo);
 }
 
-.photo-card:hover img {
-  transform: scale(1.03);
+
+/* ==========================================================================
+   QUICK LOOK MODAL PREVIEW & NAVIGATION
+   ========================================================================== */
+
+.finder-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
 }
 
-.photo-card__caption {
+.finder-modal.active {
+  display: flex;
+}
+
+.modal-window {
+  background: #ffffff;
+  border: 1px solid var(--finder-border);
+  border-radius: 12px;
+  width: 90vw;
+  max-width: 800px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-header {
+  height: 36px;
+  background: #fafafa;
+  border-bottom: 1px solid var(--finder-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.modal-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--finder-text);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--finder-sub);
+  font-size: 0.85rem;
+}
+
+.modal-body {
+  position: relative;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fcfcfc;
+  max-height: 75vh;
+}
+
+.modal-body img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 65vh;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.modal-footer {
+  padding: 8px 14px;
+  border-top: 1px solid var(--finder-border);
+  background: #fafafa;
+}
+
+.modal-meta {
+  font-size: 0.7rem;
+  font-family: monospace;
+  color: var(--finder-sub);
+}
+
+/* TOMBOL ARROW NAVIGASI MODAL (LUCIDE ICONS) */
+.modal-nav {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--space-xs);
-  background: linear-gradient(transparent, rgba(0,0,0,0.6));
-  color: #ffffff;
-  font-family: var(--font-mono);
-  font-size: var(--step--2);
-  opacity: 0;
-  transition: opacity var(--duration-fast) ease-in-out;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  user-select: none;
+  z-index: 10;
 }
 
-.photo-card:hover .photo-card__caption {
-  opacity: 1;
+.modal-nav svg,
+.modal-nav i {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
 }
 
-/* ---------- Interactive Tech Icons ---------- */
+.modal-nav:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.75);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.modal-nav.prev-btn {
+  left: 12px;
+}
+
+.modal-nav.next-btn {
+  right: 12px;
+}
+
+.modal-nav:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  transform: translateY(-50%) scale(1);
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+/* ==========================================================================
+   INTERACTIVE TECH ICONS
+   ========================================================================== */
+
 .tech-icons-section {
   margin-block: var(--space-xl);
 }
@@ -436,7 +571,6 @@
 .tech-icon {
   width: 1.5rem;
   height: 1.5rem;
-  /* Transisi halus saat kursor masuk/keluar */
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
               color var(--duration-fast) ease;
 }
@@ -447,13 +581,11 @@
   transition: opacity var(--duration-fast) ease;
 }
 
-/* ---------- Interaksi Hover ---------- */
 .icon-item:hover {
-  color: var(--color-text); /* Warna berubah menjadi tegas saat hover */
+  color: var(--color-text);
 }
 
 .icon-item:hover .tech-icon {
-  /* Efek sedikit membesar & memantul ke atas */
   transform: translateY(-3px) scale(1.15) rotate(-4deg);
   color: var(--color-accent, var(--color-text));
 }
@@ -463,7 +595,10 @@
 }
 
 
-/* ---------- Footer & Guestbook Area ---------- */
+/* ==========================================================================
+   FOOTER & AREA HAK CIPTA
+   ========================================================================== */
+
 .site-foot {
   margin-top: var(--space-2xl);
   padding-block: var(--space-l);

@@ -11,10 +11,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/font/sans.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/font/mono.css">
 
-  <link rel="stylesheet" href="/css/tokens.css">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/utilities.css">
-  <link rel="stylesheet" href="/css/blocks.css">
+  <!-- CSS Design System -->
+  <link rel="stylesheet" href="{{ '/css/tokens.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/base.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/utilities.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/blocks.css' | url }}">
 
   <!-- Anti-Flash Theme Script -->
   <script>
@@ -39,32 +40,45 @@
     </main>
 
     <footer class="site-foot">
-  <div class="site-foot__inner font-mono">
-    <div class="site-foot__links">
-      <a href="https://instagram.com/hey.rodetyo" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <span class="site-foot__sep">·</span>
-      <a href="https://linkedin.com/in/rodetyoprast" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    </div>
-    <p class="site-foot__copyright">&copy; {{ currentYear or "2026" }} {{ meta.siteName or "Rodetyo Prast" }}</p>
+      <div class="site-foot__inner font-mono">
+        <div class="site-foot__links">
+          <a href="https://instagram.com/hey.rodetyo" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <span class="site-foot__sep">·</span>
+          <a href="https://linkedin.com/in/rodetyoprast" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+        <p class="site-foot__copyright">&copy; {{ currentYear or "2026" }} {{ meta.siteName or "Rodetyo Prast" }}</p>
+      </div>
+    </footer>
   </div>
-</footer>
 
-  <!-- Safe Theme Toggle Script -->
+  <!-- Lucide Icons Library -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- JavaScript Utama Website -->
+  <script src="{{ '/js/main.js' | url }}"></script>
+
+  <!-- Script Penunjang DOM & Inisialisasi Icons -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Theme Toggle Handler
       const themeToggle = document.getElementById("theme-toggle");
-      if (!themeToggle) return;
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+          if (isDark) {
+            document.documentElement.removeAttribute("data-theme");
+            localStorage.setItem("theme", "light");
+          } else {
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      }
 
-      themeToggle.addEventListener("click", () => {
-        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-        if (isDark) {
-          document.documentElement.removeAttribute("data-theme");
-          localStorage.setItem("theme", "light");
-        } else {
-          document.documentElement.setAttribute("data-theme", "dark");
-          localStorage.setItem("theme", "dark");
-        }
-      });
+      // 2. Inisialisasi Lucide Icons awal
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
     });
   </script>
 </body>

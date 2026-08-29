@@ -3,6 +3,7 @@ const { EleventyRenderPlugin } = require("@11ty/eleventy");
 module.exports = function (eleventyConfig) {
   // ----- Static Assets (Salin folder ke folder output 'dist') -----
   eleventyConfig.addPassthroughCopy("src/css");
+  eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addPassthroughCopy("src/assets"); 
   eleventyConfig.addPassthroughCopy("src/videos");
@@ -11,6 +12,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
 
   // ----- Collections -----
+  // Collection untuk Works/Experiments
+  eleventyConfig.addCollection("works", (collectionApi) => {
+    return collectionApi
+      .getFilteredByGlob("src/works/*.md")
+      .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+  });
+
   // Case studies, sorted by "order" front matter (fallback: date)
   eleventyConfig.addCollection("caseStudies", (collectionApi) => {
     return collectionApi
